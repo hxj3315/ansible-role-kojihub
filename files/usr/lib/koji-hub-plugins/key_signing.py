@@ -1,4 +1,4 @@
-# Louis Abel <label@rockylinux.org>
+# Louis Abel <label@cclinux.org>
 # This is a koji plugin to assist in auto signing packages in sigul
 # This is going through constant change until it "works"
 #

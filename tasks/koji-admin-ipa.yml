@@ -27,7 +27,7 @@
 
 - name: Ensuring we have our scripts store
   file:
-    path: /opt/rocky-tools/scripts
+    path: /opt/circle-tools/scripts
     state: directory
     owner: "{{ koji_admin_user }}"
     group: "{{ koji_admin_user }}"
@@ -37,7 +37,7 @@
 # name: Cron job to rebuild repos
 # cron:
 #   name: "Regenerate repos"
-#   job: "/opt/rocky-tools/scripts/regen_build_repos.sh > /dev/null 2>&1"
+#   job: "/opt/circle-tools/scripts/regen_build_repos.sh > /dev/null 2>&1"
 #   minute: "5"
 #   hour: "3"
 #   user: "{{ koji_admin_user }}"

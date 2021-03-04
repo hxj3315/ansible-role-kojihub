@@ -28,70 +28,70 @@ koji_db_pass: ThisIsNotThePassword!
 koji_db_host: localhost
 
 # Web
-koji_sitename: Rocky Linux Build Service
+koji_sitename: Circle Linux Build Service
 koji_theme: false
-koji_theme_name: rocky
-koji_theme_file: rocky.tar.gz
-koji_web_url: https://koji.rockylinux.org/koji
-koji_hub_url: https://koji.rockylinux.org/kojihub
-koji_files_url: https://koji.rockylinux.org/kojifiles
+koji_theme_name: circle
+koji_theme_file: circle.tar.gz
+koji_web_url: https://koji.cclinux.org/koji
+koji_hub_url: https://koji.cclinux.org/kojihub
+koji_files_url: https://koji.cclinux.org/kojifiles
 koji_web_keytab: /etc/keytabs/koji-web.keytab
 
 # This should be changed before deployment
 koji_hub_secret: cK5XCuzMSXJfgA7yFvXkGwFu
 koji_web_cacert: /etc/pki/tls/certs/ca-bundle.crt
-koji_web_tls_cert: /etc/pki/tls/certs/koji.rockylinux.org.crt
-koji_web_tls_key: /etc/pki/tls/private/koji.rockylinux.org.key
+koji_web_tls_cert: /etc/pki/tls/certs/koji.cclinux.org.crt
+koji_web_tls_key: /etc/pki/tls/private/koji.cclinux.org.key
 
 # Kojira
 koji_kojira: true
 koji_kojira_user: kojira
-koji_kojira_user_kerb: kojira/koji.rockylinux.org
-koji_kojira_principal: kojira/koji.rockylinux.org@ROCKYLINUX.ORG
+koji_kojira_user_kerb: kojira/koji.cclinux.org
+koji_kojira_principal: kojira/koji.cclinux.org@CCLINUX.ORG
 koji_kojira_keytab: /etc/keytabs/kojira.keytab
 
 # MBS
 koji_mbs: true
 koji_mbs_user: mbs
-koji_mbs_user_kerb: mbs/mbs.rockylinux.org
-koji_mbs_principal: mbs/mbs.rockylinux.org@ROCKYLINUX.ORG
+koji_mbs_user_kerb: mbs/mbs.cclinux.org
+koji_mbs_principal: mbs/mbs.cclinux.org@CCLINUX.ORG
 koji_mbs_keytab: /etc/keytabs/mbs.keytab
 
 # GC
 koji_gc_name: garbageman
 koji_gc_keytab: /etc/keytabs/koji-gc.keytab
-koji_gc_principal: koji-gc/koji.rockylinux.org@ROCKYLINUX.ORG
+koji_gc_principal: koji-gc/koji.cclinux.org@CCLINUX.ORG
 
 # Sigul
 koji_sigul: true
 koji_sigul_user: sigul
-koji_sigul_user_kerb: sigul/sigul.rockylinux.org
-koji_sigul_principal: sigul/sigul.rockylinux.org@ROCKYLINUX.ORG
+koji_sigul_user_kerb: sigul/sigul.cclinux.org
+koji_sigul_principal: sigul/sigul.cclinux.org@CCLINUX.ORG
 
 # Storage
 koji_nfs: true
 koji_mount: /mnt/koji
-koji_nfs_path: nfs.rockylinux.org:/export/koji
+koji_nfs_path: nfs.cclinux.org:/export/koji
 
 # Koji Admin
 koji_admin_client: true
-koji_admin_user: rockykoji
-koji_admin_principal: rockykoji@ROCKYLINUX.ORG
+koji_admin_user: circlekoji
+koji_admin_principal: circlekoji@CCLINUX.ORG
 koji_admin_localuser: true
 koji_admin_localuser_name: koji
 
 # Hub Settings
-koji_hub_principal: "host/kojihub@ROCKYLINUX.ORG"
-koji_hub_proxy_principals: "HTTP/{{ inventory_hostname }}@ROCKYLINUX.ORG"
+koji_hub_principal: "host/kojihub@CCLINUX.ORG"
+koji_hub_proxy_principals: "HTTP/{{ inventory_hostname }}@CCLINUX.ORG"
 koji_hub_keytab: /etc/keytabs/host.keytab
-koji_hub_principal_format: compile/%s@ROCKYLINUX.ORG
+koji_hub_principal_format: compile/%s@CCLINUX.ORG
 # This should be sufficient even for LE
 koji_hub_ca: "{{ koji_web_cacert }}"
 
 # Koji FAS Syncing
 # This isn't implemented yet
 koji_fas_sync: false
-koji_fas_url: https://accounts.rockylinux.org
+koji_fas_url: https://accounts.cclinux.org
 
 # Koji Plugins
 koji_hub_plugins: false
@@ -101,13 +101,13 @@ koji_hub_plugins_list:
 koji_hub_plugin_key_gpg_keyphrase: lol
 koji_hub_plugin_key_gpg_name: testing-signing
 koji_hub_plugin_key_gpg_id: bbe2c108
-koji_hub_plugin_key_build_target: "dist-rocky8 dist-rocky9"
-koji_hub_plugin_key_testing_tag: dist-rocky8-testing
+koji_hub_plugin_key_build_target: "dist-circle8 dist-circle9"
+koji_hub_plugin_key_testing_tag: dist-circle8-testing
 koji_hub_plugin_key_testing: "True"
 koji_hub_plugin_key_sigul_config: "/etc/koji-hub/sigul.conf"
 
 # Not implemented
-koji_hub_plugin_mqtt_host: mqtt.rockylinux.org
+koji_hub_plugin_mqtt_host: mqtt.cclinux.org
 koji_hub_plugin_mqtt_topic: koji
 koji_hub_plugin_mqtt_ca: "{{ koji_hub_ca }}"
 koji_hub_plugin_mqtt_tls_cert: /etc/pki/tls/certs/mqtt.pem

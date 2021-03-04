@@ -1,4 +1,4 @@
-# Koji callback sent to Rocky Linux mqtt                                            
+# Koji callback sent to Circle Linux mqtt                                            
 #                                                                              
 # Adapted from https://gitlab.cern.ch/linuxsupport/rpms/koji-hub-plugins-cern/blob/master/src/mash.py
 #                                                                              
@@ -20,8 +20,8 @@ import os
 # mqtt client
 import paho.mqtt.client as mqtt
  
-CONFIG_FILE = '/etc/koji-hub/plugins/rockymsg.conf'
-PLUGIN_NAME = 'koji.plugin.rockymsg'
+CONFIG_FILE = '/etc/koji-hub/plugins/circlemsg.conf'
+PLUGIN_NAME = 'koji.plugin.circlemsg'
 DEFAULT_ARCHES = 'x86_64'
  
 config = None
@@ -35,32 +35,32 @@ def get_config():
     config = ConfigParser.SafeConfigParser()
     config.read(CONFIG_FILE)
  
-    if not config.has_section('rockymsg'):
-        config.add_section('rockymsg')
-    if not config.has_option('rockymsg', 'host'):
+    if not config.has_section('circlemsg'):
+        config.add_section('circlemsg')
+    if not config.has_option('circlemsg', 'host'):
         logging.getLogger(PLUGIN_NAME).error('No mqtt host specified in config file!')
         return None
-    if not config.has_option('rockymsg', 'port'):
+    if not config.has_option('circlemsg', 'port'):
         logging.getLogger(PLUGIN_NAME).error('No mqtt port specified in config file!')
         return None
-    if not config.has_option('rockymsg', 'topic'):
+    if not config.has_option('circlemsg', 'topic'):
         logging.getLogger(PLUGIN_NAME).error('No mqtt topic specified in config file!')
         return None
-    if not config.has_option('rockymsg', 'ca_cert'):
+    if not config.has_option('circlemsg', 'ca_cert'):
         logging.getLogger(PLUGIN_NAME).error('No mqtt cacert specified in config file!')
         return None
-    if not config.has_option('rockymsg', 'tls_cert'):
+    if not config.has_option('circlemsg', 'tls_cert'):
         logging.getLogger(PLUGIN_NAME).error('No mqtt tls_cert specified in config file!')
         return None
-    if not config.has_option('rockymsg', 'tls_key'):
+    if not config.has_option('circlemsg', 'tls_key'):
         logging.getLogger(PLUGIN_NAME).error('No mqtt tls_key specified in config file!')
         return None
-    if not config.has_option('rockymsg', 'tls_insecure'):
-        config.set('rockymsg' 'tls_insecure', 'False')
-    if not config.has_option('rockymsg', 'tls_version'):
-        config.set('rockymsg' 'tls_version', '2')
-    if not config.has_option('rockymsg', 'exclude_tags'):
-        config.set('rockymsg', 'exclude_tags', '')
+    if not config.has_option('circlemsg', 'tls_insecure'):
+        config.set('circlemsg' 'tls_insecure', 'False')
+    if not config.has_option('circlemsg', 'tls_version'):
+        config.set('circlemsg' 'tls_version', '2')
+    if not config.has_option('circlemsg', 'exclude_tags'):
+        config.set('circlemsg', 'exclude_tags', '')
  
     return config
  
@@ -78,7 +78,7 @@ def _dispatch_on_topic(payload):
         logger.info('No tag specified')
         return None
  
-    exclude_tags = config.get('rockymsg', 'exclude_tags')
+    exclude_tags = config.get('circlemsg', 'exclude_tags')
     if exclude_tags:
       exclude_tags = [x.strip() for x in exclude_tags.split(',')]
     else:
@@ -88,14 +88,14 @@ def _dispatch_on_topic(payload):
         logger.info('Tag %s excluded' % payload['tag'])
         return None
  
-    mqtt_host          = config.get('rockymsg', 'host')
-    mqtt_port          = config.get('rockymsg', 'port')
-    mqtt_topic         = config.get('rockymsg', 'topic')
-    mqtt_cacert        = config.get('rockymsg', 'ca_cert')
-    mqtt_tls_cert      = config.get('rockymsg', 'tls_cert')
-    mqtt_tls_key       = config.get('rockymsg', 'tls_key')
-    mqtt_tls_insecure  = config.get('rockymsg', 'tls_insecure')
-    mqtt_tls_version   = config.get('rockymsg', 'tls_version')
+    mqtt_host          = config.get('circlemsg', 'host')
+    mqtt_port          = config.get('circlemsg', 'port')
+    mqtt_topic         = config.get('circlemsg', 'topic')
+    mqtt_cacert        = config.get('circlemsg', 'ca_cert')
+    mqtt_tls_cert      = config.get('circlemsg', 'tls_cert')
+    mqtt_tls_key       = config.get('circlemsg', 'tls_key')
+    mqtt_tls_insecure  = config.get('circlemsg', 'tls_insecure')
+    mqtt_tls_version   = config.get('circlemsg', 'tls_version')
  
     # Connect to the bus
     try:
@@ -141,7 +141,7 @@ def _get_build_target(task_id):
  
 @callback('postTag', 'postUntag')
 #@ignore_error
-def rockymsg(cbtype, *args, **kws):
+def circlemsg(cbtype, *args, **kws):
     logger = logging.getLogger(PLUGIN_NAME)
     logger.debug('Called the %s callback, args: %s; kws: %s', cbtype, str(args), str(kws))
  
